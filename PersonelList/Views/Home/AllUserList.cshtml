@@ -1,0 +1,42 @@
+﻿@model IEnumerable<PersonelList.Models.UserDTO>
+
+@{
+    ViewBag.Title = "AllUserList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br /><br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+       
+        <th>Details</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+             <a href="/home/userdetail?id=@item.Id" ><i class="fa-solid fa-circle-arrow-right text-info text-md-right" style="pointer-events:none;font-size:30px"></i></a> 
+        </td>
+    </tr>
+}
+</table>

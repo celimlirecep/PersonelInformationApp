@@ -1,0 +1,117 @@
+﻿@model PersonelList.Models.UserDTO
+
+@{
+    ViewBag.Title = "UserDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="text-center">
+    <h4 class="display-3">User Information</h4>
+</div>
+
+<br />
+<hr />
+<br />
+
+<div class="row">
+    <div class="col-md-10 m-auto">
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <div class="col-md-8 justify-content-start">
+                    <div class="slideshow-container " style="height:250px; width:250px">
+                        @foreach (var item in Model.ImageListUrl)
+                        {
+                            <div class="mySlides fade ">
+                                <div class="numbertext">Count:  @Model.ImageListUrl.Count</div>
+                                <img src="@item" style="width:100%">
+
+                            </div>
+                        }
+
+
+
+                        <a class="prev" onclick="plusSlides(-1)">❮</a>
+                        <a class="next" onclick="plusSlides(1)">❯</a>
+
+                    </div>
+                    <div style="text-align:center;width:250px">
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="text-danger">
+                    Name: @Html.DisplayFor(model => model.FirstName)  @Html.DisplayFor(model => model.LastName)
+
+                </div>
+                <br />
+                <div>
+                    BirthDay: @Html.DisplayFor(model => model.BirthDay)
+
+                </div>
+                <br />
+                <div>
+                    Phone:@Html.DisplayFor(model => model.Phone)
+
+                </div>
+                <br />
+                <div>
+                    Department: @Html.DisplayFor(model => model.Department)
+
+                </div>
+                <br />
+                <div>
+                    Manager State:  @Html.DisplayFor(model => model.IsManager)
+
+                </div>
+            </div>
+        </div>
+      
+    </div>
+
+</div>
+
+
+<br>
+<div class="d-flex justify-content-end">
+    <div class="btn btn-outline-info">
+        <div>
+            @Html.ActionLink("Back to List", "AllUserList")
+
+        </div>
+    </div>
+</div>
+<br /><br /><br />
+
+
+<script>
+   
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+</script>
