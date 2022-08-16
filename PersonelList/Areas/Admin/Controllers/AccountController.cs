@@ -56,9 +56,9 @@ namespace PersonelList.Areas.Admin.Controllers
             {
                 ImageDTO ımageDTO = new ImageDTO()
                 {
-                    ImagePath= HelperClass.ImportImage(image, temporaryPath, newPath),
-                    UserId=
-                }
+                    ImagePath = HelperClass.ImportImage(image, temporaryPath, newPath),
+
+                };
               
 
 
