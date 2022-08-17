@@ -9,11 +9,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Drawing.Imaging;
+using PersonelList.Models.DataLayer;
 
 namespace PersonelList.Areas.Admin.Controllers
 {
     public class AccountController : Controller
     {
+        DataAccessLayer _dataAccessLayer = new DataAccessLayer();
         // GET: Admin/Account
         public ActionResult Alogin()
         {
@@ -35,6 +37,8 @@ namespace PersonelList.Areas.Admin.Controllers
 
         public ActionResult Register()
         {
+            ViewBag.Departments = _dataAccessLayer.GetAllDepartments();
+         
             Register register=new Register();
             register.BirthDay=DateTime.Now;
             return View(register);
@@ -43,26 +47,31 @@ namespace PersonelList.Areas.Admin.Controllers
         public ActionResult Register(Register model, List<HttpPostedFileBase> ImageFiles)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.Departments = _dataAccessLayer.GetAllDepartments();
                 return View(model);
+            }
             //user kaydı
 
 
             //Image kaydı
-
-            string temporaryPath = Server.MapPath("~/Images/ResizedImage");
-            string newPath = Server.MapPath("~/Images/ResizedImage");
-            List<ImageDTO> images = new List<ImageDTO>();
-            foreach (var image in ImageFiles)
+            if (ImageFiles!=null)
             {
-                ImageDTO ımageDTO = new ImageDTO()
+                string temporaryPath = Server.MapPath("~/Images/ResizedImage");
+                string newPath = Server.MapPath("~/Images/ResizedImage");
+                List<ImageDTO> images = new List<ImageDTO>();
+                foreach (var image in ImageFiles)
                 {
-                    ImagePath = HelperClass.ImportImage(image, temporaryPath, newPath),
+                    ImageDTO ımageDTO = new ImageDTO()
+                    {
+                        ImagePath = HelperClass.ImportImage(image, temporaryPath, newPath),
+                    };
 
-                };
-              
+                    images.Add(ımageDTO);
 
-
+                }
             }
+          
 
 
             return View();
@@ -76,7 +85,14 @@ namespace PersonelList.Areas.Admin.Controllers
         }
         public void AddUser(Register register,List<ImageDTO> images)
         {
-            AddUser(register,images);
+            UserData userData = new UserData();
+            userData.AddUser(register,images);
+        }
+        public List<Department> GetAllDepartments()
+        {
+             DepartmentData data = new DepartmentData();
+            List<Department> departments= data.GetAllDepartments();
+            return departments;
         }
 
     }

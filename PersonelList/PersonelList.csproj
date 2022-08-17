@@ -133,6 +133,8 @@
     <Compile Include="Areas\Admin\Model\Alogin.cs" />
     <Compile Include="Areas\Admin\Model\Employee.cs" />
     <Compile Include="Areas\Admin\Model\HelperClass.cs" />
+    <Compile Include="Models\DataLayer\DepartmentData.cs" />
+    <Compile Include="Models\DepartmentDTO.cs" />
     <Compile Include="Models\ImageDTO.cs" />
     <Compile Include="Areas\Admin\Model\Md5Encrytion.cs" />
     <Compile Include="Controllers\AccountController.cs" />

@@ -11,11 +11,12 @@ namespace PersonelList.Controllers
     
     public class HomeController : Controller
     {
-       
-       
+
+        DataAccessLayer _dataAccessLayer = new DataAccessLayer();
+
         public ActionResult AllUserList()
         {
-            DataAccessLayer _dataAccessLayer = new DataAccessLayer();
+            
             
             var userDTOList = _dataAccessLayer.GetAllUsers();
             return View(userDTOList);
@@ -24,7 +25,7 @@ namespace PersonelList.Controllers
         public ActionResult UserDetail(int id)
         {
 
-            DataAccessLayer _dataAccessLayer = new DataAccessLayer();
+            
 
             var userDTOList = _dataAccessLayer.GetUserDetail(id);
             return View(userDTOList);
